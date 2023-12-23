@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from typing import Optional
-from transakcje import transakcje
 from api import kursyWalut, aktualnyKurs
 from fastapi import FastAPI
 from dotenv import dotenv_values
