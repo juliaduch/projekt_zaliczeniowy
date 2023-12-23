@@ -2,9 +2,13 @@ from fastapi import FastAPI
 from typing import Optional
 from transakcje import transakcje
 from api import kursyWalut, aktualnyKurs
+from fastapi import FastAPI
+from dotenv import dotenv_values
+from pymongo import MongoClient
+from routes import router as T_router
 
 app = FastAPI()
-
+config = dotenv_values("passy.env")
 
 @app.get("/")
 def home():
@@ -28,18 +32,16 @@ def kursy(code: str):
         return kurs
     else:
         return {"błąd": "Nie znaleziono aktualnego kursu dla tej waluty"}
+    
+@app.on_event("startup")
+def startup_db_client():
+    app.mongodb_client = MongoClient(config["ATLAS_URI"])
+    app.database = app.mongodb_client[config["DB_NAME"]]
 
-@app.get("/transakcje")
-def get_transakcje(typ: Optional[str] = None, waluta: Optional[str] = None):
-    if typ == None and waluta == None:
-        return transakcje
-    else:
-        lista = []
-        if waluta != None: waluta=waluta.upper()
-        for item in transakcje:
-            if ((transakcje[item]["typ"] == typ) or (transakcje[item]["waluta"] == waluta)):
-                lista.append(transakcje[item])
-        if len(lista) > 0:
-            return lista
+@app.on_event("shutdown")
+def shutdown_db_client():
+    app.mongodb_client.close()
 
-    return {"błąd": "Nie znaleziono transakcji dla podanych parametrów"}
+app.include_router(T_router, tags=["pythonproject"], prefix="/pythonproject")
+
+
