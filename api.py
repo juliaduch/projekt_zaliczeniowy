@@ -2,8 +2,6 @@ import requests
 from datetime import date
 from unidecode import unidecode
 from datetime import timedelta
-from funkcje import nowyFolder
-from funkcje import zapiszDane
 import json
 import os
 
