@@ -22,3 +22,5 @@ class Transakcje(BaseModel):
                 "wydano": 27.67
             }
         }
+
+## super
