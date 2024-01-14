@@ -49,3 +49,20 @@ def usun_transakcje(id: str, request: Request):
         return {"status": "success", "message": f"Transakcja o ID {id} została usunięta"}
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Transakcja z ID {id} nie została znaleziona")
 
+## GET by typ/waluta
+@router.get("/transakcje/typ/{typ}", response_description="Znajdź transakcje po typie", response_model=List[Transakcje])
+def znajdz_transakcje_po_typie(typ: str, request: Request):
+    transakcje_typ = list(request.app.database["pythonproject"].find({"typ": typ}, limit=100))
+
+    if transakcje_typ:
+        return transakcje_typ
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Brak transakcji o typie {typ}")
+
+@router.get("/transakcje/waluta/{waluta}", response_description="Znajdź transakcje po walucie", response_model=List[Transakcje])
+def znajdz_transakcje_po_walucie(waluta: str, request: Request):
+    waluta = waluta.upper()
+    transakcje_waluta = list(request.app.database["pythonproject"].find({"waluta": waluta}, limit=100))
+
+    if transakcje_waluta:
+        return transakcje_waluta
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Brak transakcji dla waluty {waluta}")
