@@ -1,19 +1,15 @@
-Przelicznik Walut 
+Kantor Tracking
 
-Projekt Przelicznik Walut to aplikacja napisana w języku Python, wykorzystująca REST API oraz bibliotekę Matplotlib. 
-Głównym celem aplikacji jest umożliwienie użytkownikowi konwersji walut oraz prezentacja kursów wybranej waluty na wykresie w przestrzeni czasu. 
-Aplikacja korzysta z API Narodowego Banku Polskiego, aby pobrać aktualne i historyczne kursy walut.
-
-*Funkcje*:
-* Konwersja walut: Użytkownik może przeliczać wartości między różnymi walutami, wykorzystując aktualne kursy.
-* Wykres kursów: Aplikacja generuje wykres przedstawiający zmiany kursu wybranej waluty w określonym przedziale czasowym.
+Projekt Kantor Tracking to aplikacja napisana w języku Python, wykorzystująca REST API oraz baze danych MongoDB. 
+Głównym celem aplikacji jest umożliwienie użytkownikowi - pracownikowi kantoru śledzenie wykonywanych w kantorze transakcji, 
+między innymi dodawanie transakcji do bazy danych, usuwanie transakcji z bazy danych oraz aktualizowanie danych transakcji. Dodatkowo użytkownik ma możliwość sprawdzenia aktualnych kursów walut przedstawionych na dany dzień przez NBP. 
 
 *Wykorzystane technologie*:
 * Język programowania: Python
-* REST API: Wykorzystanie API Narodowego Banku Polskiego
-* Biblioteka do wizualizacji danych: Matplotlib
+* REST API: Wykorzystanie API Narodowego Banku Polskiego, własne API
+* baza danych MongoDB
 
 *Instalacja i uruchomienie*:
 1. Sklonuj repozytorium.
 2. Zainstaluj niezbędne zależności
-3. Uruchom aplikację za pomocą python main.py.
+3. Uruchom aplikację za pomocą komendy uvicorn app:app --reload
