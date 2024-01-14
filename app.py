@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-from typing import Optional
 from api import kursyWalut, aktualnyKurs
 from fastapi import FastAPI
 from dotenv import dotenv_values
@@ -13,9 +12,9 @@ config = dotenv_values("passy.env")
 def home():
     return [{"/kursy": "Wyświetl aktualne kursy dla wszystkich walut"},
             {"/kursy/usd": "Wyświetl aktualny kurs dla USD"},
-            {"/transakcje": "Wyświetl wszystkie transakcje"},
-            {"/transakcje?typ=sprzedaz": "Wyświetl wszystkie transakcje o typie sprzedaz"},
-            {"/transakcje?waluta=eur": "Wyświetl wszystkie transakcje dla waluty eur"}]
+            {"/pythonproject/transakcje": "Wyświetl wszystkie transakcje"},
+            {"/pythonproject/transakcje/typ/sprzedaz": "Wyświetl wszystkie transakcje o typie sprzedaz"},
+            {"/pythonproject/transakcje/waluta/usd": "Wyświetl wszystkie transakcje dla waluty usd"}]
 
 
 @app.get("/kursy/")
